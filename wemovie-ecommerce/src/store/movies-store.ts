@@ -23,9 +23,7 @@ export const useMovieStore = create<MovieStore>((set) => {
       set({ isLoading: true });
 
       try {
-        const response = await fetch(
-          'https://wefit-movies.vercel.app/api/movies'
-        );
+        const response = await fetch(process.env.REACT_APP_API_URL);
         const movies = await response.json();
 
         // Apena para forçar a tela de loading

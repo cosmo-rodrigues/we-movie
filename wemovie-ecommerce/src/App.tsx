@@ -1,28 +1,16 @@
-import { useEffect } from 'react';
-import { useMovieStore } from './store/movies-store';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './styles/global';
+import { defaultTheme } from './styles/themes/default-theme';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './constants';
 
 const App = () => {
-  const [availableMovies, fetchMovies, isLoading] = useMovieStore((state) => [
-    state.availableMovies,
-    state.fetchMovies,
-    state.isLoading,
-  ]);
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          {availableMovies.map((movie) => (
-            <p>{movie.title}</p>
-          ))}
-        </div>
-      )}
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 };
