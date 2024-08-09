@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { CartPage, HomePage, NotFoundPage } from '../pages';
+import { CartPage, HomePage, NotFoundPage, SuccessPage } from '../pages';
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +10,11 @@ export const router = createBrowserRouter([
   {
     path: '/cart',
     element: <CartPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: '/success',
+    element: <SuccessPage />,
     errorElement: <NotFoundPage />,
   },
   {

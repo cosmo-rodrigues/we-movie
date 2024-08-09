@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { Currency, currencyFormatter, Language } from '../../helpers';
 import { groupedMovies } from '../../helpers/grouped-movies';
-import { GroupedMovie } from '../../store';
+import { GroupedMovie, useCartStore } from '../../store';
 import { ButtonComponent } from '../common';
 import { DesktopComponent, MobileComponent } from './components';
 import {
@@ -13,12 +14,19 @@ import {
 } from './style';
 
 export const CartComponent = ({ cartItems }: { cartItems: GroupedMovie[] }) => {
+  const emptyCart = useCartStore((state) => state.emptyCart);
+  const navigate = useNavigate();
   const totalSum: number = cartItems.reduce(
     (accumulator, movie) => accumulator + movie.price,
     0
   );
 
   const totalByMovie = groupedMovies(cartItems);
+
+  const handleSubmit = () => {
+    navigate('/success');
+    emptyCart();
+  };
 
   return (
     <CartContainer>
@@ -49,7 +57,7 @@ export const CartComponent = ({ cartItems }: { cartItems: GroupedMovie[] }) => {
           title="FINALIZAR PEDIDO"
           hasIcon={false}
           shouldChangeColor={false}
-          onClick={() => {}}
+          onClick={() => handleSubmit()}
         />
       </CartFooter>
     </CartContainer>

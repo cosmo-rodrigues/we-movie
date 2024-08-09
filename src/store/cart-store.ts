@@ -9,6 +9,7 @@ export interface GroupedMovie extends MovieType {
 type CartStore = {
   cart: GroupedMovie[];
   addToCart: (item: GroupedMovie) => void;
+  emptyCart: () => void;
   removeFromCart: (id: number) => void;
 };
 
@@ -16,6 +17,7 @@ export const useCartStore = create<CartStore>((set) => {
   return {
     cart: [],
     addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
+    emptyCart: () => set(() => ({ cart: [] })),
     removeFromCart: (id: number) =>
       set((state) => {
         const existingItem = state.cart.find((item) => item.id === id);
