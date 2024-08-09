@@ -1,6 +1,6 @@
 import { Currency, currencyFormatter, Language } from '../../helpers';
 import { groupedMovies } from '../../helpers/grouped-movies';
-import { GroupedMovie, MovieType } from '../../store';
+import { GroupedMovie } from '../../store';
 import { ButtonComponent } from '../common';
 import { DesktopComponent, MobileComponent } from './components';
 import {

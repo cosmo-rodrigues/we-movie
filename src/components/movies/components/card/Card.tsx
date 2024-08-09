@@ -1,13 +1,13 @@
 import { ShoppingCart } from '../../../../assets';
 import { Currency, currencyFormatter, Language } from '../../../../helpers';
-import { MovieType, useCartStore } from '../../../../store';
+import { GroupedMovie, useCartStore } from '../../../../store';
 import { ComponentProps } from '../../../../types';
 import { ButtonComponent } from '../../../common';
 import { CardContainer, Image, MovieContent } from './style';
 import PlaceholderImage from '/placeholder-image.webp';
 
 interface CardProps extends ComponentProps {
-  movie: MovieType;
+  movie: GroupedMovie;
 }
 export const Card = ({ movie }: CardProps) => {
   const addToCart = useCartStore((state) => state.addToCart);
