@@ -1,13 +1,24 @@
 import { Currency, currencyFormatter, Language } from '../../helpers';
-import { MovieType } from '../../store';
+import { groupedMovies } from '../../helpers/grouped-movies';
+import { GroupedMovie, MovieType } from '../../store';
 import { ButtonComponent } from '../common';
-import { CartContainer, CartHeader, MovieCart } from './style';
+import { DesktopComponent, MobileComponent } from './components';
+import {
+  CartContainer,
+  CartFooter,
+  CartHeader,
+  FooterAmount,
+  MovieCart,
+  Separator,
+} from './style';
 
-export const CartComponent = ({ cartItems }: { cartItems: MovieType[] }) => {
+export const CartComponent = ({ cartItems }: { cartItems: GroupedMovie[] }) => {
   const totalSum: number = cartItems.reduce(
     (accumulator, movie) => accumulator + movie.price,
     0
   );
+
+  const totalByMovie = groupedMovies(cartItems);
 
   return (
     <CartContainer>
@@ -18,24 +29,29 @@ export const CartComponent = ({ cartItems }: { cartItems: MovieType[] }) => {
       </CartHeader>
 
       <MovieCart>
-        {cartItems.map((movie) => (
-          <p>{movie.title}</p>
-        ))}
+        {totalByMovie.map((movie) => {
+          return (
+            <>
+              <MobileComponent movie={movie} key={movie.id} />
+              <DesktopComponent movie={movie} key={movie.id} />
+            </>
+          );
+        })}
       </MovieCart>
-      <div></div>
-      <div>
+      <Separator />
+      <CartFooter>
+        <FooterAmount>
+          <p>TOTAL</p>
+          <span>{currencyFormatter(totalSum, Currency.BRL, Language.PT)}</span>
+        </FooterAmount>
+
         <ButtonComponent
           title="FINALIZAR PEDIDO"
           hasIcon={false}
           shouldChangeColor={false}
           onClick={() => {}}
         />
-
-        <div>
-          <p>TOTAL</p>
-          <span>{currencyFormatter(totalSum, Currency.BRL, Language.PT)}</span>
-        </div>
-      </div>
+      </CartFooter>
     </CartContainer>
   );
 };

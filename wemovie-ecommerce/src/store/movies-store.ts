@@ -26,9 +26,6 @@ export const useMovieStore = create<MovieStore>((set) => {
         const response = await fetch(process.env.REACT_APP_API_URL);
         const movies = await response.json();
 
-        // Apena para forçar a tela de loading
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
         set({ availableMovies: movies.products });
       } catch (error) {
         set({

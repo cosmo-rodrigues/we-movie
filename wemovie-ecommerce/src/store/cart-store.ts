@@ -1,15 +1,14 @@
 import { create } from 'zustand';
+import { MovieType } from './movies-store';
 
-type Item = {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-};
+export interface GroupedMovie extends MovieType {
+  quantity: number;
+  subtotal: number;
+}
 
 type CartStore = {
-  cart: Item[];
-  addToCart: (item: Item) => void;
+  cart: GroupedMovie[];
+  addToCart: (item: GroupedMovie) => void;
   removeFromCart: (id: number) => void;
 };
 
@@ -17,7 +16,28 @@ export const useCartStore = create<CartStore>((set) => {
   return {
     cart: [],
     addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
-    removeFromCart: (id) =>
-      set((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
+    removeFromCart: (id: number) =>
+      set((state) => {
+        const existingItem = state.cart.find((item) => item.id === id);
+
+        if (!existingItem) return { cart: state.cart };
+
+        if (existingItem.quantity > 1) {
+          return {
+            cart: state.cart.map((item) =>
+              item.id === id
+                ? {
+                    ...item,
+                    quantity: item.quantity - 1,
+                    subtotal: item.subtotal - item.price,
+                  }
+                : item
+            ),
+          };
+        } else {
+          // Remove the item if only one exists
+          return { cart: state.cart.filter((item) => item.id !== id) };
+        }
+      }),
   };
 });

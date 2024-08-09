@@ -3,7 +3,6 @@ import { Currency, currencyFormatter, Language } from '../../../../helpers';
 import { MovieType, useCartStore } from '../../../../store';
 import { ComponentProps } from '../../../../types';
 import { ButtonComponent } from '../../../common';
-import { AddButton } from '../add-button';
 import { CardContainer, Image, MovieContent } from './style';
 import PlaceholderImage from '/placeholder-image.webp';
 
