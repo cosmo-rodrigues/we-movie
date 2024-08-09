@@ -1,14 +1,22 @@
 import { ShoppingCart } from '../../../../assets';
-import { Button, IconContainer } from './style';
+import { Button, ButtonTitle, IconContainer } from './style';
 
-export const AddButton = () => {
+export const AddButton = ({
+  itensOnCart,
+  onClick,
+}: {
+  itensOnCart: number;
+  onClick: () => void;
+}) => {
+  const movieAlreadyAdded = itensOnCart > 0;
+
   return (
-    <Button>
+    <Button isMovieAdded={movieAlreadyAdded} onClick={onClick}>
       <IconContainer>
         <ShoppingCart />
-        <span>0</span>
+        <span>{itensOnCart}</span>
       </IconContainer>
-      <span>ADICIONAR AO CARRINHO</span>
+      <ButtonTitle>ADICIONAR AO CARRINHO</ButtonTitle>
     </Button>
   );
 };

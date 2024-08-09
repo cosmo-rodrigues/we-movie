@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
-export const Button = styled.button<{ isMovieAdded: boolean }>`
+export const Button = styled.button<{
+  shouldChangeColor: boolean;
+  hasIcon: boolean;
+}>`
   align-items: center;
-  background-color: ${({ theme, isMovieAdded }) =>
-    isMovieAdded ? theme.colors.green100 : theme.colors.blue100};
+  background-color: ${({ theme, shouldChangeColor }) =>
+    shouldChangeColor ? theme.colors.green100 : theme.colors.blue100};
   border-radius: 4px;
   display: flex;
   gap: 12px;
   height: 40px;
   justify-content: center;
   line-height: 16px;
-  max-width: 306.7px;
+  max-width: ${({ hasIcon }) => (hasIcon ? '306.7px' : '173px')};
   padding: 8px;
   width: 100%;
 

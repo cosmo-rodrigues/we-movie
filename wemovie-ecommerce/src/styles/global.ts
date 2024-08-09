@@ -15,6 +15,18 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 87.5%; // 14px
     }
   }
+  a {
+    color: ${({ theme }) => theme.colors.white};
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+      text-decoration: none;
+    }
+  }
   body {
     background: ${({ theme }) => theme.colors.grey800};
     -webkit-font-smoothing: antialiased;

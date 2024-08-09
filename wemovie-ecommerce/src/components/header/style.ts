@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const NavContainer = styled.nav`
   align-items: center;
-  color: ${({ theme }) => theme.colors.white};
   display: flex;
   height: 88px;
   justify-content: space-between;

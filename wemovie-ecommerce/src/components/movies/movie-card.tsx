@@ -1,14 +1,27 @@
-import { useMovieStore } from '../../store/movies-store';
+import { memo } from 'react';
+import { useMovieStore } from '../../store';
 import { Card } from './components';
-import { HeroContainer } from './style';
+import { CardsContainer, HeroContainer } from './style';
+import { EmptyState } from '../empty-state';
 
-export const MovieCard = () => {
+export const MovieCardComponent = () => {
   const movies = useMovieStore((state) => state.availableMovies);
+  const fetchMovies = useMovieStore((state) => state.fetchMovies);
+  const hasMovies = movies.length > 0;
+
   return (
     <HeroContainer>
-      {movies.map((movie) => (
-        <Card key={movie.id} movie={movie} />
-      ))}
+      {hasMovies ? (
+        <CardsContainer>
+          {movies.map((movie) => (
+            <Card key={movie.id} movie={movie} />
+          ))}
+        </CardsContainer>
+      ) : (
+        <EmptyState buttonTile="Recarregar página" buttonAction={fetchMovies} />
+      )}
     </HeroContainer>
   );
 };
+
+export const MovieCard = memo(MovieCardComponent);
