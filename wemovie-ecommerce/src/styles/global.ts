@@ -16,26 +16,21 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   body {
-    background: var(--background);
+    background: ${({ theme }) => theme.colors.grey800};
     -webkit-font-smoothing: antialiased;
   }
   body, input, textarea, button {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-weight: 400;
-  }
-  h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 600;
+    font-weight: 700;
   }
   button, a {
     cursor: pointer;
   }
   button {
-    color: ${({ theme }) => theme.colors.blue100};
+    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
     transition: 0.5s;
-  }
-  button:hover {
-    color: ${({ theme }) => theme.colors.blue200};
+    border: none;
   }
   [disabled] {
     opacity: 0.6;

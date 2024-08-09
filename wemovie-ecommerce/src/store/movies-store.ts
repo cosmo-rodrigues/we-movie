@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type Movie = {
+export type MovieType = {
   id: number;
   title: string;
   price: number;
@@ -8,7 +8,7 @@ type Movie = {
 };
 
 type MovieStore = {
-  availableMovies: Movie[];
+  availableMovies: MovieType[];
   isLoading: boolean;
   error: { code: number; message: string } | null;
   fetchMovies: () => void;
